@@ -2,19 +2,18 @@ package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'
 .. ';.luarocks/share/lua/5.2/?/init.lua'
 package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
 
--- @MuteTeam
+----------@teleash
 http = require("socket.http")
 https = require("ssl.https")
 http.TIMEOUT = 10
 JSON = require('dkjson')
--------@MuteTeam
+.........
 tdcli = dofile('tdcli.lua')
 redis = (loadfile "./libs/redis.lua")()
 serpent = require('serpent')
 serp = require 'serpent'.block
 sudo_users = {
-  238773538,
-  173606679,
+  302302946,
   0
 }
 
@@ -214,7 +213,7 @@ function tdcli_update_callback(data)
         tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>PONG</b>', 1, 'html')
       end
       if input:match("^[#!/][Ii][Dd]$") then
-        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>SuperGroup ID : </b><code>'..string.sub(chat_id, 5,14)..'</code>\n<b>User ID : </b><code>'..user_id..'</code>\n<b>Channel : </b>@MuteTeam', 1, 'html')
+        tdcli.sendText(chat_id, msg.id_, 0, 1, nil, '<b>SuperGroup id : </b><code>'..string.sub(chat_id, 5,14)..'</code>\n<b>User ID : </b><code>'..user_id..'</code>\n<b>Channel : </b>@teleash', 1, 'html')
       end
 
       if input:match("^[#!/][Pp][Ii][Nn]$") and reply_id and is_owner(msg) then
@@ -267,20 +266,20 @@ function tdcli_update_callback(data)
         tdcli.sendText(chat_id, 0, 0, 1, nil, 'user '..input:match('^[/!#]delowner (.*)')..' rem ownered', 1, 'md')
       end
       -----------------------------------------------------------------------------------------------------------------------
-      if input:match('^[/!#]promote') and is_sudo(msg) and msg.reply_to_message_id_ then
+      if input:match('^[/!#]addadmin') and is_sudo(msg) and msg.reply_to_message_id_ then
 tdcli.getMessage(chat_id,msg.reply_to_message_id_,setmod_reply,nil)
 end
-if input:match('^[/!#]demote') and is_sudo(msg) and msg.reply_to_message_id_ then
+if input:match('^[/!#]deladmin') and is_sudo(msg) and msg.reply_to_message_id_ then
 tdcli.getMessage(chat_id,msg.reply_to_message_id_,remmod_reply,nil)
 end
 			
-			sm = input:match('^[/!#]promote (.*)')
+			sm = input:match('^[/!#]addadmin (.*)')
 if sm and is_sudo(msg) then
   redis:sadd('mods:'..chat_id,sm)
-  tdcli.sendText(chat_id, 0, 0, 1, nil, '🚀 #Done\nuser '..sm..'*Add Promote*', 1, 'md')
+  tdcli.sendText(chat_id, 0, 0, 1, nil, '🚀 #Done\nuser '..sm..'*Add admin*', 1, 'md')
 end
 
-dm = input:match('^[/!#]demote (.*)')
+dm = input:match('^[/!#]deladmin (.*)')
 if dm and is_sudo(msg) then
   redis:srem('mods:'..chat_id,dm)
   tdcli.sendText(chat_id, 0, 0, 1, nil, '🚀 #Done\nuser '..dm..'*Rem Promote*', 1, 'md')
@@ -1007,7 +1006,7 @@ local res = http.request(database.."joke.db")
         .."*Mute Video : *".."`"..video.."`".."\n"
         .."*Mute Document : *".."`"..document.."`".."\n"
         .."*Mute Text : *".."`"..text1.."`".."\n"
-        .."*Mute Team* - @MuteTeam"
+        
         tdcli.sendText(chat_id, msg.id_, 0, 1, nil, text, 1, 'md')
       end
       if input:match("^[#!/][Ff]wd$") then
@@ -1190,7 +1189,7 @@ if redis:get('edittg:'..data.chat_id_) then
 end 
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
 	
-    -- @MuteTeam
+    -- @teleash
     tdcli_function ({
       ID="GetChats",
       offset_order_="9223372036854775807",
